@@ -11,6 +11,10 @@ function classFings() {
     fpPromise
         .then(fp => fp.get())
         .then(result => console.log(result.visitorId))
+        //Link the page to deliver the results 
+    document.getElementById("finger").onclick = function() {
+        location.href = "tech.html";
+    };
 }
 const menu = document.querySelector('#mobile-menu')
 const menuLinks = document.querySelector('.navbar__menu')
