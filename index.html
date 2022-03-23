@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassicFings Browser Fingerprinting Tool</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="styles.css" id="navbar__logo"> <i class="fas fa-gem"></i> ClassicFings </a>
+            <div class="navbar__toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+
+            </div>
+            <ul class="navbar__menu">
+                <li class="navbar">
+                    <a href="styles.css" class="navbar__links">Home</a>
+                </li>
+                <li class="navbar">
+                    <a href="styles.css" class="navbar__links">Donate</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!----HERO SECTION-->
+    <div class="main">
+        <div class="main__container">
+            <div class="main__content" id="cFings">
+                <h1>Check Your Browser Fingerprint</h1>
+                <h2>The browser Fingerprint</h2>
+                <P>View details</P>
+                <button class="main__btn" id="finger"><a href="/">View Full Details</a></button>
+            </div>
+            <div class="main__img--container">
+                <img src="image/pic1.svg" alt="pic" id="main_img">
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+    <script>
+        // Initialize the agent at application startup.
+        const fpPromise = new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.onload = resolve;
+                script.onerror = reject;
+                script.async = true;
+                script.src = 'https://cdn.jsdelivr.net/npm/' +
+                    '@fingerprintjs/fingerprintjs-pro@3/dist/fp.min.js';
+                document.head.appendChild(script);
+            })
+            .then(() => FingerprintJS.load({
+                apiKey: 'Rj1uQxYPXTNOS7czdJyD',
+                region: 'eu'
+            }));
+
+        // Get the visitor identifier when you need it.
+        fpPromise
+            .then(fp => fp.get())
+            .then(result => console.log(result.visitorId));
+    </script>
+</body>
+
+</html>
