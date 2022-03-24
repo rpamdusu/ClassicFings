@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClassicFings Browser Fingerprinting Tool</title>
-    <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
 
 </head>
 
@@ -26,10 +26,10 @@
             </div>
             <ul class="navbar__menu">
                 <li class="navbar">
-                    <a href="styles.css" class="navbar__links">Home</a>
+                    <a href="#" class="navbar__links">Home</a>
                 </li>
                 <li class="navbar">
-                    <a href="styles.css" class="navbar__links">Donate</a>
+                    <a href="#" class="navbar__links">Donate</a>
                 </li>
             </ul>
         </div>
@@ -41,35 +41,67 @@
                 <h1>Check Your Browser Fingerprint</h1>
                 <h2>The browser Fingerprint</h2>
                 <P>View details</P>
-                <button class="main__btn" id="finger" onclick="classFings()"><a href="tech.html">View Full Details</a></button>
+                <button class="main__btn" onclick="classFings()">View Full Details</button>
             </div>
             <div class="main__img--container">
                 <img src="image/pic1.svg" alt="pic" id="main_img">
             </div>
         </div>
     </div>
-    <script src="app.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ClientJS/0.2.1/client.min.js"></script>
     <script>
         // Initialize the agent at application startup.
-        const fpPromise = new Promise((resolve, reject) => {
-                const script = document.createElement('script');
-                script.onload = resolve;
-                script.onerror = reject;
-                script.async = true;
-                script.src = 'https://cdn.jsdelivr.net/npm/' +
-                    '@fingerprintjs/fingerprintjs-pro@3/dist/fp.min.js';
-                document.head.appendChild(script);
-            })
-            .then(() => FingerprintJS.load({
+        const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
+            .then(FingerprintJS => FingerprintJS.load({
                 apiKey: 'Rj1uQxYPXTNOS7czdJyD',
                 region: 'eu'
-            }));
+            }))
 
-        // Get the visitor identifier when you need it.
-        fpPromise
-            .then(fp => fp.get())
-            .then(result => console.log(result.visitorId));
+
+        function classFings() {
+
+            const client = new ClientJS();
+
+            const classicFingsData = {
+                browserData: client.getBrowserData(),
+                fingerprint: client.getFingerprint(),
+                customFingerprint: client.getCustomFingerprint(),
+
+                userAgent: client.getUserAgent(),
+                userAgentLowerCase: client.getUserAgentLowerCase(),
+
+                browser: client.getBrowser(),
+                browserVersion: client.getBrowserVersion(),
+                isIE: client.isIE(),
+                isChrome: client.isChrome(),
+                isFirefox: client.isFirefox(),
+                isSafari: client.isSafari(),
+                isOpera: client.isOpera(),
+
+                engine: client.getEngine(),
+                engineVersion: client.getEngineVersion(),
+            }
+            // Get the visitor identifier when you need it.
+            fpPromise
+                .then(fp => fp.get())
+                .then(result => {
+                    // This is the visitor identifier:
+                    const visitorId = result.visitorId
+                    console.log(visitorId)
+                    classicFingsData.visitorId = visitorId
+
+                    console.log("classicFingsData =>", classicFingsData)
+
+                    localStorage.setItem('classicFingsData', JSON.stringify(classicFingsData));
+                    // Link the page to deliver the results
+
+                    location.href = "tech.html";
+                })
+        }
     </script>
+
+<!--    <script src="app.js"></script>-->
 </body>
 
 </html>
