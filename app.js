@@ -1,4 +1,9 @@
 import FingerprintJS from '@fingerprintjs/fingerprintjs-pro'
+// via CommonJS imports:
+const { ClientJS } = require('clientjs');
+const client = new ClientJS();
+// in a browser, when using a script tag:
+const ClientJS = window.ClientJS;
 
 function classFings() {
     // Initialize an agent at application startup.
