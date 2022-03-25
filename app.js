@@ -1,16 +1,16 @@
-import FingerprintJS from '@fingerprintjs/fingerprintjs-pro'
-// via CommonJS imports:
-const { ClientJS } = require('clientjs');
+// import FingerprintJS from '@fingerprintjs/fingerprintjs-pro'
+// // via CommonJS imports:
+// const { ClientJS } = require('clientjs');
 const client = new ClientJS();
 // in a browser, when using a script tag:
-const ClientJS = window.ClientJS;
+// const ClientJS = window.ClientJS;
 
 function classFings() {
     // Initialize an agent at application startup.
-    const fpPromise = FingerprintJS.load({
-        apiKey: 'Rj1uQxYPXTNOS7czdJyD',
-        region: 'eu'
-    })
+    // const fpPromise = FingerprintJS.load({
+    //     apiKey: 'Rj1uQxYPXTNOS7czdJyD',
+    //     region: 'eu'
+    // })
 
     // Get the visitor identifier when you need it.
     fpPromise
@@ -98,6 +98,8 @@ function classFings() {
         location.href = "tech.html";
     };
 }
+
+
 const menu = document.querySelector('#mobile-menu')
 const menuLinks = document.querySelector('.navbar__menu')
 

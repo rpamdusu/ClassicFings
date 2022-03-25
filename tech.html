@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results | ClassicFings Browser Fingerprinting Tool</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-eLT4eRYPHTmTsFGFAzjcCWX+wHfUInVWNm9YnwpiatljsZOwXtwV2Hh6sHM6zZD9" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+
+</head>
+
+<body onload="pageLoaded()">
+<nav class="navbar">
+    <div class="navbar__container">
+        <a href="styles.css" id="navbar__logo"> <i class="fas fa-gem"></i> ClassicFings </a>
+        <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+
+        </div>
+        <ul class="navbar__menu">
+            <li class="navbar">
+                <a href="#" class="navbar__links">Home</a>
+            </li>
+            <li class="navbar">
+                <a href="#" class="navbar__links">Donate</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!----HERO SECTION-->
+<div class="main">
+    <div>
+        <div class="results">
+            <code id="storedData"></code>
+        </div>
+    </div>
+</div>
+
+<script>
+    function pageLoaded() {
+        const retrievedObject = localStorage.getItem('classicFingsData');
+
+        console.log('classicFingsData: ', JSON.parse(retrievedObject));
+        if(retrievedObject) {
+            document.getElementById("storedData").innerHTML = retrievedObject;
+
+        }
+        else {
+            document.getElementById("storedData").innerHTML = 'No data found!';
+        }
+    }
+</script>
+
+<!--    <script src="app.js"></script>-->
+</body>
+
+</html>
